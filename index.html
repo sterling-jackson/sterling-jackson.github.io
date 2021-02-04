@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Analytics Beacon</title>
+        <script language="javascript" src="analytics.js"></script>
+        <script>
+            beacon.config.uniqueId = 123456789
+            beacon.debug = true
+        </script>
+    </head>
+    <body>
+        <h1>Hello!</h1>
+        <p><a id="url-1" href="#some-url">URL 1 - Clicking this should catch a click event.</a></p>
+        <p><a id="url-2" href="#some-url2">URL 2 - Clicking this should catch a click event.</a></p>
+        <p><a id="url-3" href="#some-url3">URL 3 - Clicking this should catch a click event.</a></p>
+        <p id="paragraph-1">A simple paragraph. We don't want click tracking to catch this.</p>
+        <p id="paragraph-2">Click this paragraph to trigger an error event.</p>
+    </body>
+    <script>
+        document.getElementById("paragraph-1").addEventListener("click", function() {
+            console.log("This should log a message to the browser console.")
+        })
+        document.getElementById("paragraph-2").addEventListener("click", function() {
+            doSomething()
+        })
+    </script>
+</html>
