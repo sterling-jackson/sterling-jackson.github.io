@@ -30,8 +30,7 @@ beacon.send = function(events) {
             var request = fetch(beacon.config.destination, {
                 method: "POST",
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
+                    "content-type": "application/json",
                     "verification-token": beacon.config.token
                 },
                 body: JSON.stringify(beacon.events),
