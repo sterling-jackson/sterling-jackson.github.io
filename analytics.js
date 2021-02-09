@@ -50,8 +50,8 @@ beacon.send = function(events) {
             var xhr = new XMLHttpRequest()
             xhr.onload = beacon.purge
             xhr.open("POST", beacon.config.destination, false)
+            xhr.setRequestHeader("content-type", "application/json");
             xhr.setRequestHeader("verification-token", beacon.config.token);
-            xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
             xhr.send(events)
         }
     }
