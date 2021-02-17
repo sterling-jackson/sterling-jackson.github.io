@@ -26,9 +26,8 @@ beacon.purge = function() {
 // If the Fetch API isn't available, fall back to XHR.
 beacon.send = function(events) {
     if (events.length > 0) {
-        if (beacon.debug){
-            beacon.log("Sending events to endpoint.")
-            beacon.log(events)
+        if (beacon.debug) {
+            beacon.log(`Sending ${events.length} events to endpoint.`)
         }
         if (beacon.session.fetchApiSupported) {
             var request = fetch(beacon.config.destination, {
@@ -49,6 +48,9 @@ beacon.send = function(events) {
                         beacon.log("Events delivered successfully.")
                     }
                     beacon.purge()
+                }
+                else {
+                    beacon.log(`Failed to deliver events - ${response.errors}`)
                 }
             })
 
