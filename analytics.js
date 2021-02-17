@@ -26,6 +26,10 @@ beacon.purge = function() {
 // If the Fetch API isn't available, fall back to XHR.
 beacon.send = function(events) {
     if (events.length > 0) {
+        if (beacon.debug){
+            beacon.log("Sending events to endpoint.")
+            beacon.log(events)
+        }
         if (beacon.session.fetchApiSupported) {
             var request = fetch(beacon.config.destination, {
                 method: "POST",
@@ -41,6 +45,9 @@ beacon.send = function(events) {
             })
             .then(function(response) {
                 if (response.status == 200) {
+                    if (beacon.debug) {
+                        beacon.log("Events delivered successfully.")
+                    }
                     beacon.purge()
                 }
             })
@@ -96,8 +103,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Debugging
     if (beacon.debug) {
         beacon.log("A DOMContentLoaded event has been triggered.")
-        console.log(beacon.config.uniqueId)
-        console.log(beacon.session.userAgent)
     }
 
     // DOMContentLoaded Event
