@@ -102,18 +102,25 @@ beacon.event = function(description, event) {
     }
 }
 
+// Create valid version 4 UUIDs with high entropy.
 beacon.uuid = function() {
     var template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+    var uuid = ""
     var seed = Math.random() * 16
     var random = Math.random()
     var entropy = (performance && performance.now && (performance.now() * 1000)) || Date.now()
+    var character = ""
 
-    return template.replace(/[xy]/g, function(character) {
+    for (i = 0; i < template.length; i++) { 
+        character = template[i]
         seed = Math.random() * 16
         random = (entropy + seed) % 16 | 0
         entropy = Math.floor(entropy / 16)
-        return (character === 'x' ? random : (random & 0x3 | 0x8)).toString(16)
-    })
+        value = character === 'x' ? random : (random & 0x3 | 0x8)
+        uuid += (character === '-' || character === '4') ? character : value.toString(16)
+    }
+
+    return uuid
 }
 
 // Attach to global onload event to set initial session state.
