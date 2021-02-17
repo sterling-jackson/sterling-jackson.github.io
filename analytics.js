@@ -73,8 +73,8 @@ beacon.send = function(events) {
 beacon.log = function(message) {
     console.log(message)
 
-    if (beacon.debug) {
-        alert(message)
+    if (beacon.debug && beacon.debugTarget) {
+        document.getElementById(beacon.debugTarget).innerHTML += `${message}<br>`;
     }
 }
 
