@@ -39,8 +39,8 @@ beacon.send = function(events) {
                 body: JSON.stringify(beacon.events),
                 cache: "no-cache",
                 mode: "cors",
-                keepalive: true,
-                window: window
+                keepalive: true
+                // window: window
             })
             .then(function(response) {
                 if (response.status == 200) {
