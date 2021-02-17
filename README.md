@@ -7,7 +7,7 @@
 Import the analaytics library then capture and pass in the user's unique ID.
 
 ```
-<script language="javascript" src="lirio-analytics.js"></script>
+<script language="javascript" src="analytics.js"></script>
 <script>
     beacon.config.uniqueId = 123456789
 </script>
@@ -18,3 +18,5 @@ Import the analaytics library then capture and pass in the user's unique ID.
 Only clicks that have a `href` property are captured.
 
 Debug mode can be activated with `beacon.debug = true`.
+
+Debug output can be sent to an element with `beacon.debugTarget = "elementId"`.
