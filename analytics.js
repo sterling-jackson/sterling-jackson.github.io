@@ -53,7 +53,9 @@ beacon.send = function(events) {
                     beacon.log(`Failed to deliver events - ${response.errors}`)
                 }
             })
-
+            .catch(function(error) {
+                beacon.log(error)
+            })
         }
         else {
             var xhr = new XMLHttpRequest()
