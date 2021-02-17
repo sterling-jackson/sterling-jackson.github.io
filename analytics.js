@@ -52,6 +52,8 @@ beacon.send = function(events) {
             xhr.open("POST", beacon.config.destination, false)
             xhr.setRequestHeader("content-type", "application/json");
             xhr.setRequestHeader("verification-token", beacon.config.token);
+            xhr.setRequestHeader("Connection", "keep-alive");
+            xhr.setRequestHeader("Keep-Alive", "timeout=5, max=60");
             xhr.send(events)
         }
     }
@@ -142,8 +144,8 @@ document.addEventListener("visibilitychange", function(event) {
     }
 
     // Visibility Change Event
-    // The Beacon API is supported, go ahead and send the events.
-    if (beacon.session.beaconApiSupported) {
+    // The Fetch API is supported, go ahead and send the events.
+    if (beacon.session.fetchApiSupported) {
         if (beacon.events.length > 0) {
             //navigator.sendBeacon(beacon.config.destination, beacon.events)
             beacon.send(beacon.events)
@@ -159,10 +161,9 @@ document.addEventListener("pagehide", function(event) {
     }
 
     // Page Hide Event
-    // The Beacon API is supported, go ahead and send the events.
-    if (beacon.session.beaconApiSupported) {
+    // The Fetch API is supported, go ahead and send the events.
+    if (beacon.session.fetchApiSupported) {
         if (beacon.events.length > 0) {
-            //navigator.sendBeacon(beacon.config.destination, beacon.events)
             beacon.send(beacon.events)
         }
     }
