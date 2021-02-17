@@ -62,6 +62,10 @@ beacon.send = function(events) {
 // Adds an abstraction around logging.
 beacon.log = function(message) {
     console.log(message)
+
+    if (beacon.debug) {
+        alert(message)
+    }
 }
 
 // Adds an event to the internal event store.
@@ -158,6 +162,22 @@ document.addEventListener("pagehide", function(event) {
     // Debugging
     if (beacon.debug) {
         beacon.log("A page hide event has been triggered.")
+    }
+
+    // Page Hide Event
+    // The Fetch API is supported, go ahead and send the events.
+    if (beacon.session.fetchApiSupported) {
+        if (beacon.events.length > 0) {
+            beacon.send(beacon.events)
+        }
+    }
+})
+
+// Safari doesn't properly fire visibility change events when the property transitions to hidden.
+document.addEventListener("beforeunload", function(event) {
+    // Debugging
+    if (beacon.debug) {
+        beacon.log("An unload event has been triggered.")
     }
 
     // Page Hide Event
