@@ -13,6 +13,7 @@
         <p><a id="url-1" href="#some-url">URL 1 - Clicking this should catch a click event.</a></p>
         <p><a id="url-2" href="#some-url2">URL 2 - Clicking this should catch a click event.</a></p>
         <p><a id="url-3" href="#some-url3">URL 3 - Clicking this should catch a click event.</a></p>
+        <p><a id="url-4" href="https://www.google.com">URL 4 - Clicking this should leave the page and catch a click event.</a></p>
         <p id="paragraph-1">A simple paragraph. We don't want click tracking to catch this.</p>
         <p id="paragraph-2">Click this paragraph to trigger an error event.</p>
 
@@ -28,7 +29,7 @@
             doSomething()
         })
 
-        document.getElementById("debug").innerHTML += beacon.session.beaconApiSupported;
-        document.getElementById("debug").innerHTML += beacon.session.fetchApiSupported;
+        document.getElementById("debug").innerHTML += `Beacon API: ${beacon.session.beaconApiSupported}<br>`;
+        document.getElementById("debug").innerHTML += `Fetch API: ${beacon.session.fetchApiSupported}<br>`;
     </script>
 </html>

@@ -22,7 +22,7 @@ beacon.purge = function() {
     beacon.events = []
 }
 
-// Sends tracking events from the browser to the destination when the Beacon API isn't supported.
+// Sends events from the browser to the destination endpoint.
 // If the Fetch API isn't available, fall back to XHR.
 beacon.send = function(events) {
     if (events.length > 0) {
@@ -40,7 +40,6 @@ beacon.send = function(events) {
                 cache: "no-cache",
                 mode: "cors",
                 keepalive: true
-                // window: window
             })
             .then(function(response) {
                 if (response.status == 200) {
@@ -136,7 +135,7 @@ document.addEventListener("click", function(event) {
 })
 
 // Attach to global error events to capture browser errors.
-window.addEventListener("error", function(message, url, line, column, error) {
+window.addEventListener("error", function(event) {
     // Debugging
     if (beacon.debug) {
         beacon.log("An error event has been triggered.")
@@ -144,7 +143,7 @@ window.addEventListener("error", function(message, url, line, column, error) {
 
     // Error Event
     var data = {
-        "message": message
+        "message": event.error
     }
     beacon.event('error', data)
 })
