@@ -81,6 +81,7 @@ beacon.log = function(message) {
 // Adds an event to the internal event store.
 beacon.event = function(description, event) {
     var metadata = {
+        "eventId": beacon.uuid(),
         "userId": beacon.config.uniqueId,
         "eventOrigin": "lirio-analytics-beacon",
         "eventType": description,
@@ -99,6 +100,20 @@ beacon.event = function(description, event) {
         beacon.events.push(payload)
         beacon.send(beacon.events)
     }
+}
+
+beacon.uuid = function() {
+    var template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+    var seed = Math.random() * 16
+    var random = Math.random()
+    var entropy = (performance && performance.now && (performance.now() * 1000)) || Date.now()
+
+    return template.replace(/[xy]/g, function(character) {
+        seed = Math.random() * 16
+        random = (entropy + seed) % 16 | 0
+        entropy = Math.floor(entropy / 16)
+        return (character === 'x' ? random : (random & 0x3 | 0x8)).toString(16)
+    })
 }
 
 // Attach to global onload event to set initial session state.
@@ -143,7 +158,7 @@ window.addEventListener("error", function(event) {
 
     // Error Event
     var data = {
-        "message": event.error
+        "message": event.message
     }
     beacon.event('error', data)
 })
