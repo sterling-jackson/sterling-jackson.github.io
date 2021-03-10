@@ -1,4 +1,4 @@
-# Lirio Analytics Beacon
+# Analytics Beacon
 
 ## The analytics beacon is designed to capture user interactions including page views, browser errors, and links clicked within a web site or web application. These events will be transmitted individually if the Beacon API is not supported or in batches if it is.
 
